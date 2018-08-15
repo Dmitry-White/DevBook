@@ -3,18 +3,19 @@ const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
 const keys = require('../../config/keys');
 
 // Load User Model
 const User = require('../../models/User');
 
 // @route  GET api/users/test
-// @desc   Tests users route
+// @desc   Test users route
 // @access Public
 router.get('/test', (req, res) => res.json({msg: "Users Works"}));
 
 // @route  GET api/users/register
-// @desc   Registers user
+// @desc   Register user
 // @access Public
 router.post('/register', (req, res) => {
     User.findOne({ email: req.body.email })
@@ -50,7 +51,7 @@ router.post('/register', (req, res) => {
 });
 
 // @route  POST api/users/login
-// @desc   Logins user / Returning JWT token
+// @desc   Login user / Returning JWT token
 // @access Public
 router.post('/login', (req, res) => {
     const email = req.body.email;
@@ -94,7 +95,18 @@ router.post('/login', (req, res) => {
                 .catch(err => console.log(err));
         })
         .catch(err => console.log(err));
-})
+});
+
+// @route  GET api/users/current
+// @desc   Return current user
+// @access Private
+router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
+    res.json({
+        id: req.user.id,
+        name: req.user.name,
+        email: req.user.email
+    });
+});
 
 
 module.exports = router;
