@@ -1,4 +1,6 @@
 const express = require('express');
+
+// Create custom router
 const router = express.Router();
 
 // @route  GET api/posts/test

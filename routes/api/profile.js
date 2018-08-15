@@ -1,5 +1,10 @@
 const express = require('express');
+
+// Create custom router
 const router = express.Router();
+
+// Load Profile Model
+const Profile = require('../../models/Profile');
 
 // @route  GET api/profile/test
 // @desc   Tests profile route
