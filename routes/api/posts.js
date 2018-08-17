@@ -118,11 +118,10 @@ router.post('/unlike/:post_id', passport.authenticate('jwt', {session: false}), 
             Post.findById(req.params.post_id)
                 .then(post => {
 
-                    if (
-                        post.likes
+                    if (post.likes
                             .filter(like => like.user.toString() === req.user.id)
-                            .length === 0
-                    ) return res.status(400).json({ notliked: 'User have not yet liked this post' });
+                            .length === 0)
+                    return res.status(400).json({ notliked: 'User have not yet liked this post' });
 
                     // Remove user ID from likes array
                     const removeIndex = post.likes.map(like => like.user.toString()).indexOf(req.user.id);
@@ -134,6 +133,37 @@ router.post('/unlike/:post_id', passport.authenticate('jwt', {session: false}), 
 
                 })
                 .catch(err => res.status(404).json(err))
+        })
+        .catch(err => res.status(404).json(err));
+});
+
+
+// @route  POST api/posts/comment/:post_id
+// @desc   Comment a post
+// @access Private
+router.post('/comment/:post_id', passport.authenticate('jwt', {session: false}), (req, res) => {
+    const { errors, isValid } = validatePostInput(req.body);
+
+    // Check Validation
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+
+    Post.findById(req.params.post_id)
+        .then(post => {
+            const newComment = {
+                user: req.user.id,
+                text: req.body.text,
+                name: req.body.name,
+                avatar: req.user.avatar
+            };
+
+            // Add to comments array
+            post.comments.unshift(newComment);
+
+            post.save()
+                .then(post => res.json(post))
+                .catch(err => res.status(404).json({postnotfound: 'Post not found'}));
         })
         .catch(err => res.status(404).json(err));
 });
