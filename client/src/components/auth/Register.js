@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios';
 
 class Register extends Component {
     state = {
@@ -20,7 +21,10 @@ class Register extends Component {
         const { name, email, password, password2 } = this.state;
 
         const newUser = { name, email, password, password2 };
-        console.log(newUser);
+
+        axios.post('/api/users/register', newUser)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err.response.data));
     };
 
     render() {
@@ -31,7 +35,7 @@ class Register extends Component {
                         <div className="col-md-8 m-auto">
                             <h1 className="display-4 text-center">Create an account</h1>
                             <p className="lead text-center">It's free and always will be.</p>
-                            <form action="create-profile.html" onSubmit={this.onSubmit}>
+                            <form onSubmit={this.onSubmit}>
                                 <div className="form-group">
                                     <input
                                         type="text"
