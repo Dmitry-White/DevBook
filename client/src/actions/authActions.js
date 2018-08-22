@@ -12,7 +12,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // Login;
-export const loginUser = (userData, history) => dispatch => {
+export const loginUser = (userData) => dispatch => {
     axios.post('/api/users/login', userData)
         .then(res => {
             // Save to LocalStorage
@@ -25,8 +25,6 @@ export const loginUser = (userData, history) => dispatch => {
             const decoded = jwt_decode(token);
 
             dispatch(setCurrentUser(decoded));
-
-            history.push('/dashboard');
         })
         .catch(err => dispatch(setErrors(err)));
 };
@@ -36,7 +34,7 @@ const setErrors = err => ({
     payload: err.response.data
 });
 
-const setCurrentUser = decoded => ({
+export const setCurrentUser = decoded => ({
     type: SET_CURRENT_USER,
     payload: decoded
 })

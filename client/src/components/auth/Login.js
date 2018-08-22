@@ -14,6 +14,10 @@ class Login extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
+        if (nextProps.auth.isAuthenticated) {
+            this.props.history.push('/dashboard');
+        }
+
         if (nextProps.errors) {
             this.setState({ errors: nextProps.errors });
         }
@@ -29,9 +33,9 @@ class Login extends Component {
 
         const { email, password } = this.state;
 
-        const user = { email, password };
+        const userData = { email, password };
 
-        this.props.loginUser(user, this.props.history);
+        this.props.loginUser(userData);
     };
 
     render() {
