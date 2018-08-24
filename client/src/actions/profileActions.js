@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, } from './types';
+import { GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, } from './types';
 
 // Current Profile
 export const getCurrentProfile = () => dispatch => {
@@ -18,6 +18,18 @@ export const getCurrentProfile = () => dispatch => {
             payload: {}
         }));
 };
+
+// Create Profile
+export const createProfile = (profileData, history) => dispatch => {
+    axios.post('/api/profile', profileData)
+        .then(res => history.push('/dashboard'))
+        .catch(err => dispatch(setErrors(err)));
+};
+
+const setErrors = err => ({
+    type: GET_ERRORS,
+    payload: err.response.data
+});
 
 export const clearCurrentProfile = () => dispatch => {
     dispatch({
