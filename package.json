@@ -1,5 +1,5 @@
 {
-  "name": "devbook",
+  "name": "Devbook",
   "version": "1.0.0",
   "description": "Social Network for Developers",
   "main": "server.js",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dmitry-White/DevBook.git"
+    "url": "git+https://github.com/Dmitry-White/Devbook.git"
   },
   "author": "Dmitry White",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Dmitry-White/DevBook/issues"
+    "url": "https://github.com/Dmitry-White/Devbook/issues"
   },
-  "homepage": "https://github.com/Dmitry-White/DevBook#readme",
+  "homepage": "https://github.com/Dmitry-White/Devbook#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
