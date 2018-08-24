@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import TextFieldGroup from '../common/TextFieldGroup';
+import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+import SelectListGroup from '../common/SelectListGroup';
+import InputGroup from '../common/InputGroup';
 
 class CreateProfile extends Component {
     state = {
@@ -30,7 +33,68 @@ class CreateProfile extends Component {
     };
 
     render() {
-        const { handle, company, website, location, bio, githubusername, skills, errors } = this.state;
+        const { errors, displaySocialInputs } = this.state;
+
+        const options = [
+            { label: "* Select Professional Status", value: '0' },
+            { label: "Developer", value: 'Developer' },
+            { label: "Junior Developer", value: 'Junior Developer' },
+            { label: "Senior Developer", value: 'Senior Developer' },
+            { label: "Manager", value: 'Manager' },
+            { label: "Student or Learning", value: 'Student or Learning' },
+            { label: "Instructor", value: 'Instructor or Teacher' },
+            { label: "Intern", value: 'Intern' },
+            { label: "Other", value: 'Other' }
+        ];
+
+        let socialInputs;
+        if (displaySocialInputs) {
+            socialInputs = (
+                <div>
+                    <InputGroup
+                        placeholder='Twitter Profile URL'
+                        name='twitter'
+                        value={this.state.twitter}
+                        onChange={this.onChange}
+                        error={errors.twitter}
+                        icon='fab fa-twitter'
+                    />
+                    <InputGroup
+                        placeholder='Facebook Profile URL'
+                        name='facebook'
+                        value={this.state.facebook}
+                        onChange={this.onChange}
+                        error={errors.facebook}
+                        icon='fab fa-facebook'
+                    />
+                    <InputGroup
+                        placeholder='Linkedin Profile URL'
+                        name='linkedin'
+                        value={this.state.linkedin}
+                        onChange={this.onChange}
+                        error={errors.linkedin}
+                        icon='fab fa-linkedin'
+                    />
+                    <InputGroup
+                        placeholder='YouTube Profile URL'
+                        name='youtube'
+                        value={this.state.youtube}
+                        onChange={this.onChange}
+                        error={errors.youtube}
+                        icon='fab fa-youtube'
+                    />
+                    <InputGroup
+                        placeholder='Instagram Profile URL'
+                        name='instagram'
+                        value={this.state.instagram}
+                        onChange={this.onChange}
+                        error={errors.instagram}
+                        icon='fab fa-instagram'
+                    />
+                </div>
+            );
+        }
+
         return (
             <div className="create-profile">
                 <div className="container">
@@ -45,30 +109,24 @@ class CreateProfile extends Component {
                                     type='text'
                                     placeholder='* Profile handle'
                                     name='hanlde'
-                                    value={handle}
+                                    value={this.state.handle}
                                     onChange={this.onChange}
                                     error={errors.handle}
-                                    info="A unique handle for your profile URL. Your full name, company name, nickname, etc (This CAN'T be changed later)"
+                                    info="A unique handle for your profile URL. Your full name, company name, nickname, etc"
                                 />
-                                <div className="form-group">
-                                    <select className="form-control form-control-lg" name="status">
-                                        <option value="0">* Select Professional Status</option>
-                                        <option value="Developer">Developer</option>
-                                        <option value="Junior Developer">Junior Developer</option>
-                                        <option value="Senior Developer">Senior Developer</option>
-                                        <option value="Manager">Manager</option>
-                                        <option value="Student or Learning">Student or Learning</option>
-                                        <option value="Instructor">Instructor or Teacher</option>
-                                        <option value="Intern">Intern</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <small className="form-text text-muted">Give us an idea of where you are at in your career</small>
-                                </div>
+                                <SelectListGroup
+                                    name='status'
+                                    value={this.state.status}
+                                    onChange={this.onChange}
+                                    error={errors.status}
+                                    options={options}
+                                    info="Give us an idea of where you are at in your career"
+                                />
                                 <TextFieldGroup
                                     type='text'
                                     placeholder='Company'
                                     name='company'
-                                    value={company}
+                                    value={this.state.company}
                                     onChange={this.onChange}
                                     error={errors.company}
                                     info="Could be your own company or one you work for"
@@ -77,7 +135,7 @@ class CreateProfile extends Component {
                                     type='text'
                                     placeholder='Website'
                                     name='website'
-                                    value={website}
+                                    value={this.state.website}
                                     onChange={this.onChange}
                                     error={errors.website}
                                     info="Could be your own or a company website"
@@ -86,7 +144,7 @@ class CreateProfile extends Component {
                                     type='text'
                                     placeholder='Location'
                                     name='location'
-                                    value={location}
+                                    value={this.state.location}
                                     onChange={this.onChange}
                                     error={errors.location}
                                     info="City & state suggested (eg. Boston, MA)"
@@ -95,7 +153,7 @@ class CreateProfile extends Component {
                                     type='text'
                                     placeholder='Skills'
                                     name='skills'
-                                    value={skills}
+                                    value={this.state.skills}
                                     onChange={this.onChange}
                                     error={errors.skills}
                                     info="Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)"
@@ -104,65 +162,33 @@ class CreateProfile extends Component {
                                     type='text'
                                     placeholder='Github Username'
                                     name='githubusername'
-                                    value={githubusername}
+                                    value={this.state.githubusername}
                                     onChange={this.onChange}
                                     error={errors.githubusername}
                                     info="If you want your latest repos and a Github link, include your username"
                                 />
-                                <div className="form-group">
-                                    <textarea className="form-control form-control-lg" placeholder="A short bio of yourself" name="bio"></textarea>
-                                    <small className="form-text text-muted">Tell us a little about yourself</small>
-                                </div>
+                                <TextAreaFieldGroup
+                                    placeholder='A short bio of yourself'
+                                    name='bio'
+                                    value={this.state.bio}
+                                    onChange={this.onChange}
+                                    error={errors.bio}
+                                    info="Tell us a little about yourself"
+                                />
 
                                 <div className="mb-3">
-                                    <button type="button" className="btn btn-light">Add Social Network Links</button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-light"
+                                        onClick={() => {
+                                            this.setState(prevState => ({
+                                                displaySocialInputs: !prevState.displaySocialInputs
+                                            }))
+                                        }}
+                                    >Add Social Network Links</button>
                                     <span className="text-muted">Optional</span>
                                 </div>
-
-                                <div className="input-group mb-3">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text">
-                                            <i className="fab fa-twitter"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" className="form-control form-control-lg" placeholder="Twitter Profile URL" name="twitter" />
-                                </div>
-
-                                <div className="input-group mb-3">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text">
-                                            <i className="fab fa-facebook"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" className="form-control form-control-lg" placeholder="Facebook Page URL" name="facebook" />
-                                </div>
-
-                                <div className="input-group mb-3">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text">
-                                            <i className="fab fa-linkedin"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" className="form-control form-control-lg" placeholder="Linkedin Profile URL" name="linkedin" />
-                                </div>
-
-                                <div className="input-group mb-3">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text">
-                                            <i className="fab fa-youtube"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" className="form-control form-control-lg" placeholder="YouTube Channel URL" name="youtube" />
-                                </div>
-
-                                <div className="input-group mb-3">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text">
-                                            <i className="fab fa-instagram"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" className="form-control form-control-lg" placeholder="Instagram Page URL" name="instagram" />
-                                </div>
+                                {socialInputs}
                                 <input type="submit" className="btn btn-info btn-block mt-4" />
                             </form>
                         </div>
