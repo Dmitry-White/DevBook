@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
 import setAuthToken from '../utils/setAuthToken';
-import { GET_PROFILE, PROFILE_LOADING, GET_ERRORS, } from './types';
+import { GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, } from './types';
 
 // Current Profile
 export const getCurrentProfile = () => dispatch => {
@@ -19,6 +19,12 @@ export const getCurrentProfile = () => dispatch => {
             type: GET_PROFILE,
             payload: {}
         }));
+};
+
+export const clearCurrentProfile = () => dispatch => {
+    dispatch({
+        type: CLEAR_CURRENT_PROFILE
+    });
 };
 
 export const setProfileLoading = () => {
