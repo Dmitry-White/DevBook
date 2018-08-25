@@ -44,7 +44,7 @@ class AddEducation extends Component {
             degree: this.state.degree,
             fieldofstudy: this.state.fieldofstudy,
             from: this.state.from,
-            to: this.state.to,
+            to: this.state.current ? null : this.state.to,
             description: this.state.description,
         }
         this.props.addEducation(newEducation, this.props.history);
