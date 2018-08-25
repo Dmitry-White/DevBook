@@ -44,6 +44,13 @@ export const deleteAccount = () => dispatch => {
     }
 };
 
+// Add or edit experience
+export const addExperience = (expData, history) => dispatch => {
+    axios.post('/api/profile/experience', expData)
+        .then(res => history.push('/dashboard'))
+        .catch(err => dispatch(setErrors(err)));
+};
+
 const setErrors = err => ({
     type: GET_ERRORS,
     payload: err.response.data
