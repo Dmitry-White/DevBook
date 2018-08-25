@@ -13,16 +13,8 @@ export const getCurrentProfile = () => dispatch => {
     dispatch(setProfileLoading());
 
     axios.get('/api/profile')
-        .then(res => {
-            dispatch({
-                type: GET_PROFILE,
-                payload: res.data
-            })
-        })
-        .catch(err => dispatch({
-            type: GET_PROFILE,
-            payload: {}
-        }));
+        .then(res => dispatch(getProfile(res)))
+        .catch(err => dispatch(getProfile({ data: {} })));
 };
 
 // Create Profile
@@ -51,6 +43,13 @@ export const addExperience = (expData, history) => dispatch => {
         .catch(err => dispatch(setErrors(err)));
 };
 
+// Delete experience
+export const deleteExperience = expId => dispatch => {
+    axios.delete(`/api/profile/experience/${expId}`)
+        .then(res => dispatch(getProfile(res)))
+        .catch(err => dispatch(setErrors(err)));
+};
+
 // Add or edit education
 export const addEducation = (eduData, history) => dispatch => {
     axios.post('/api/profile/education', eduData)
@@ -61,6 +60,11 @@ export const addEducation = (eduData, history) => dispatch => {
 const setErrors = err => ({
     type: GET_ERRORS,
     payload: err.response.data
+});
+
+const getProfile = res => ({
+    type: GET_PROFILE,
+    payload: res.data
 });
 
 export const clearCurrentProfile = () => dispatch => {
