@@ -14,7 +14,7 @@ const ProfileItem = props => {
                 <div className="col-lg-6 col-md-4 col-8">
                     <h3>{user.name}</h3>
                     <p>{status} {isEmpty(company) ? null : <span>at {company}</span>}</p>
-                    <p>{isEmpty(company) ? null : location}</p>
+                    <p>{isEmpty(location) ? null : location}</p>
                     <Link to={`/profile/${handle}`} className="btn btn-info">View Profile</Link>
                 </div>
                 <div className="col-md-4 d-none d-lg-block">

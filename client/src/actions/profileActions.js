@@ -18,6 +18,15 @@ export const getCurrentProfile = () => dispatch => {
         .catch(err => dispatch(getProfile({ data: {} })));
 };
 
+// Profile by handle
+export const getProfileByHandle = handle => dispatch => {
+    dispatch(setProfileLoading());
+
+    axios.get(`/api/profile/handle/${handle}`)
+        .then(res => dispatch(getProfile(res)))
+        .catch(err => dispatch(getProfile({ data: null })));
+};
+
 // Get all profiles
 export const getProfiles = () => dispatch => {
     dispatch(setProfileLoading());
