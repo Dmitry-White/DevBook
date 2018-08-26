@@ -29,7 +29,10 @@ class Profile extends Component {
                 <Fragment>
                     <ProfileHeader profile={profile} />
                     <ProfileAbout profile={profile} />
-                    <ProfileCreds profile={profile} />
+                    <ProfileCreds
+                        experience={profile.experience}
+                        education={profile.education}
+                    />
                     <ProfileGithub profile={profile} />
                 </Fragment>
             );
