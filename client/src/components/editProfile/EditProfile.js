@@ -10,7 +10,7 @@ import InputGroup from '../common/InputGroup';
 import { createProfile, getCurrentProfile } from '../../actions/profileActions';
 import isEmpty from '../../validation/isEmpty';
 
-class CreateProfile extends Component {
+class EditProfile extends Component {
     state = {
         displaySocialInputs: false,
         handle: '',
@@ -19,7 +19,7 @@ class CreateProfile extends Component {
         location: '',
         status: '',
         skills: '',
-        githubusername: '',
+        github: '',
         bio: '',
         twitter: '',
         facebook: '',
@@ -48,8 +48,8 @@ class CreateProfile extends Component {
             profile.company = !isEmpty(profile.company) ? profile.company : '';
             profile.website = !isEmpty(profile.website) ? profile.website : '';
             profile.location = !isEmpty(profile.location) ? profile.location : '';
-            profile.githubusername = !isEmpty(profile.githubusername)
-                ? profile.githubusername
+            profile.github = !isEmpty(profile.github)
+                ? profile.github
                 : '';
             profile.bio = !isEmpty(profile.bio) ? profile.bio : '';
             profile.social = !isEmpty(profile.social) ? profile.social : {};
@@ -77,7 +77,7 @@ class CreateProfile extends Component {
                 location: profile.location,
                 status: profile.status,
                 skills: skillsCSV,
-                githubusername: profile.githubusername,
+                github: profile.github,
                 bio: profile.bio,
                 twitter: profile.twitter,
                 facebook: profile.facebook,
@@ -103,7 +103,7 @@ class CreateProfile extends Component {
             location: this.state.location,
             status: this.state.status,
             skills: this.state.skills,
-            githubusername: this.state.githubusername,
+            github: this.state.github,
             bio: this.state.bio,
             twitter: this.state.twitter,
             facebook: this.state.facebook,
@@ -178,7 +178,7 @@ class CreateProfile extends Component {
         }
 
         return (
-            <div className="create-profile">
+            <div className="edit-profile">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
@@ -242,10 +242,10 @@ class CreateProfile extends Component {
                                 <TextFieldGroup
                                     type='text'
                                     placeholder='Github Username'
-                                    name='githubusername'
-                                    value={this.state.githubusername}
+                                    name='github'
+                                    value={this.state.github}
                                     onChange={this.onChange}
-                                    error={errors.githubusername}
+                                    error={errors.github}
                                     info="If you want your latest repos and a Github link, include your username"
                                 />
                                 <TextAreaFieldGroup
@@ -280,7 +280,7 @@ class CreateProfile extends Component {
     }
 };
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
@@ -291,4 +291,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(CreateProfile));
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile));

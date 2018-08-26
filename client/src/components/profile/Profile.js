@@ -33,7 +33,9 @@ class Profile extends Component {
                         experience={profile.experience}
                         education={profile.education}
                     />
-                    <ProfileGithub profile={profile} />
+                    {profile.github
+                        ? <ProfileGithub user={profile.github} />
+                        : null}
                 </Fragment>
             );
         }
