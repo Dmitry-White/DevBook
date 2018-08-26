@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
 const ProfileCreds = props => {
@@ -73,6 +74,11 @@ const ProfileCreds = props => {
             </div>
         </div>
     );
+};
+
+ProfileCreds.propTypes = {
+    education: PropTypes.array.isRequired,
+    experience: PropTypes.array.isRequired
 };
 
 export default ProfileCreds;
