@@ -15,6 +15,7 @@ import Footer from './components/layout/Footer';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Profiles from './components/profiles/Profiles';
+import Posts from './components/posts/Posts';
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/createProfile/CreateProfile';
 import EditProfile from './components/editProfile/EditProfile';
@@ -59,6 +60,7 @@ class App extends Component {
                 <PrivateRoute path='/edit-profile' exact component={EditProfile} />
                 <PrivateRoute path='/add-experience' exact component={AddExperience} />
                 <PrivateRoute path='/add-education' exact component={AddEducation} />
+                <PrivateRoute path='/feed' exact component={Posts} />
               </Switch>
               <Route path='/not-found' exact component={NotFound} />
             </div>
