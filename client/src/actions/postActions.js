@@ -29,7 +29,7 @@ export const getPosts = () => dispatch => {
 };
 
 // Post by Id
-export const getPost = postId => dispatch => {
+export const getCurrentPost = postId => dispatch => {
     dispatch(setPostsLoading());
 
     axios.get(`/api/posts/${postId}`)
