@@ -25,7 +25,7 @@ export const getPosts = () => dispatch => {
 
     axios.get('/api/posts')
         .then(res => dispatch(getAllPosts(res)))
-        .catch(err => dispatch(getAllPosts({ data: {} })));
+        .catch(err => dispatch(getAllPosts({ data: null })));
 };
 
 // Post by Id
