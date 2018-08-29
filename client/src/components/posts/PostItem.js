@@ -8,7 +8,6 @@ import { deletePost } from '../../actions/postActions';
 
 class PostItem extends Component {
     onDeleteClick = post_id => {
-
         this.props.deletePost(post_id);
     };
 

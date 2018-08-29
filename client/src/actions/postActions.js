@@ -42,7 +42,7 @@ export const deletePost = postId => dispatch => {
     axios.delete(`/api/posts/${postId}`)
         .then(res => dispatch({
             type: DELETE_POST,
-            payload: res.data
+            payload: postId
         }))
         .catch(err => dispatch(setErrors(err)));
 };

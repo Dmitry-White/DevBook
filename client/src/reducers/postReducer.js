@@ -33,7 +33,8 @@ export default (state = initialState, action) => {
         case DELETE_POST:
             return {
                 ...state,
-                posts: action.payload
+                posts: state.posts.filter(post => post._id !== action.payload)
+                // TODO: there's a doubt about server deleting
             }
         default:
             return state;
