@@ -20,8 +20,8 @@ export const addPost = postData => dispatch => {
 };
 
 // Get all posts
-export const getPosts = () => dispatch => {
-    dispatch(setPostsLoading());
+export const getPosts = (load = true) => dispatch => {
+    if (load) dispatch(setPostsLoading());
 
     axios.get('/api/posts')
         .then(res => dispatch(getAllPosts(res)))
@@ -50,14 +50,14 @@ export const deletePost = postId => dispatch => {
 // Like a  Post
 export const likePost = postId => dispatch => {
     axios.post(`/api/posts/like/${postId}`)
-        .then(res => dispatch(getAllPosts(res)))
+        .then(res => dispatch(getPosts(false)))
         .catch(err => dispatch(setErrors(err)));
 };
 
 // Unlike a  Post
 export const unlikePost = postId => dispatch => {
     axios.post(`/api/posts/unlike/${postId}`)
-        .then(res => dispatch(getAllPosts(res)))
+        .then(res => dispatch(getPosts(false)))
         .catch(err => dispatch(setErrors(err)));
 };
 
