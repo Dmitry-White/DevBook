@@ -34,7 +34,7 @@ export const getCurrentPost = postId => dispatch => {
 
     axios.get(`/api/posts/${postId}`)
         .then(res => dispatch(getPost(res)))
-        .catch(err => dispatch(getPost({ data: {} })));
+        .catch(err => dispatch(getPost({ data: null })));
 };
 
 // Delete Post
