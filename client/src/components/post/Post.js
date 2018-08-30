@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import PostItem from '../posts/PostItem';
-import PostForm from '../posts/PostForm';
+import CommentForm from './CommentForm';
 import Spinner from '../common/Spinner';
 import { getCurrentPost } from '../../actions/postActions';
 
@@ -27,7 +27,7 @@ class Post extends Component {
             postContent = (
                 <Fragment>
                     <PostItem post={post} showActions={false} />
-                    <PostForm />
+                    <CommentForm />
 
                     <div className="comments">
 
