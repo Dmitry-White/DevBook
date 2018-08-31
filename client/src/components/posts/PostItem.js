@@ -7,16 +7,16 @@ import { Link } from 'react-router-dom';
 import { deletePost, likePost, unlikePost } from '../../actions/postActions';
 
 class PostItem extends Component {
-    onDeleteClick = post_id => {
-        this.props.deletePost(post_id);
+    onDeleteClick = postId => {
+        this.props.deletePost(postId);
     };
 
-    onLikeClick = post_id => {
-        this.props.likePost(post_id);
+    onLikeClick = postId => {
+        this.props.likePost(postId);
     };
 
-    onUnlikeClick = post_id => {
-        this.props.unlikePost(post_id);
+    onUnlikeClick = postId => {
+        this.props.unlikePost(postId);
     };
 
     findUserLike = likes => {
