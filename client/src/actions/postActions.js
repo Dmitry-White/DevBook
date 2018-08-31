@@ -62,8 +62,8 @@ export const unlikePost = postId => dispatch => {
 };
 
 // Comment a  Post
-export const commentPost = postId => dispatch => {
-    axios.post(`/api/posts/comment/${postId}`)
+export const commentPost = (postId, commentData) => dispatch => {
+    axios.post(`/api/posts/comment/${postId}`, commentData)
         .then(res => dispatch(getPost(res)))
         .catch(err => dispatch(setErrors(err)));
 };

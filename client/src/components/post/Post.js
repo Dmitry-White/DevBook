@@ -27,7 +27,7 @@ class Post extends Component {
             postContent = (
                 <Fragment>
                     <PostItem post={post} showActions={false} />
-                    <CommentForm />
+                    <CommentForm postId={post._id} />
 
                     <div className="comments">
 
