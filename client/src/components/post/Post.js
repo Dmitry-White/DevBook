@@ -7,6 +7,7 @@ import PostItem from '../posts/PostItem';
 import CommentForm from './CommentForm';
 import Spinner from '../common/Spinner';
 import { getCurrentPost } from '../../actions/postActions';
+import CommentFeed from './CommentFeed';
 
 class Post extends Component {
     componentDidMount() {
@@ -28,40 +29,7 @@ class Post extends Component {
                 <Fragment>
                     <PostItem post={post} showActions={false} />
                     <CommentForm postId={post._id} />
-
-                    <div className="comments">
-
-                        <div className="card card-body mb-3">
-                            <div className="row">
-                                <div className="col-md-2">
-                                    <a href="profile.html">
-                                        <img className="rounded-circle d-none d-md-block" src="https://www.gravatar.com/avatar/anything?s=200&d=mm" alt="" />
-                                    </a>
-                                    <br />
-                                    <p className="text-center">Kevin Smith</p>
-                                </div>
-                                <div className="col-md-10">
-                                    <p className="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint possimus corporis sunt necessitatibus! Minus
-                            nesciunt soluta suscipit nobis.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="card card-body mb-3">
-                            <div className="row">
-                                <div className="col-md-2">
-                                    <a href="profile.html">
-                                        <img className="rounded-circle d-none d-md-block" src="https://www.gravatar.com/avatar/anything?s=200&d=mm" alt="" />
-                                    </a>
-                                    <br />
-                                    <p className="text-center">Karen Johnson</p>
-                                </div>
-                                <div className="col-md-10">
-                                    <p className="lead"> Amet accusamus distinctio cupiditate blanditiis dolor? Illo perferendis eveniet cum cupiditate aliquam?</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <CommentFeed comments={post.comments} postId={post._id} />
                 </Fragment>
             )
         }
