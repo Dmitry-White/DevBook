@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import {
     GET_ERRORS,
+    CLEAR_ERRORS,
     POSTS_LOADING,
     GET_POST,
     GET_POSTS,
@@ -11,6 +12,7 @@ import {
 
 // Add Post
 export const addPost = postData => dispatch => {
+    dispatch(clearErrors());
     axios.post('/api/posts', postData)
         .then(res => dispatch({
             type: ADD_POST,
@@ -63,6 +65,7 @@ export const unlikePost = postId => dispatch => {
 
 // Comment a  Post
 export const commentPost = (postId, commentData) => dispatch => {
+    dispatch(clearErrors());
     axios.post(`/api/posts/comment/${postId}`, commentData)
         .then(res => dispatch(getPost(res)))
         .catch(err => dispatch(setErrors(err)));
@@ -95,4 +98,11 @@ export const setPostsLoading = () => {
     return {
         type: POSTS_LOADING
     }
+};
+
+
+export const clearErrors = () => dispatch => {
+    dispatch({
+        type: CLEAR_ERRORS
+    });
 };
